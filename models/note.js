@@ -1,9 +1,22 @@
 const mongoose = require('mongoose')
 
 const noteSchema = new mongoose.Schema({
-    content: String,
-    title: String,
-    // labels - array of strings
+    content: {
+        type: String,
+        minlength: 0,
+        required: true
+    },
+    title: {
+        type: String,
+        minlength: 0,
+        required: true
+    },
+    labels: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Label'
+        }
+    ],
     pinned: Boolean,
     color: String
 })

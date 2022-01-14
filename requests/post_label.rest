@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/labels
+Content-Type: application/json
+
+{
+    "name": "Test label 2"
+}
