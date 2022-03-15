@@ -4,12 +4,12 @@ const noteSchema = new mongoose.Schema({
     content: {
         type: String,
         minlength: 0,
-        required: true
+        // required: true
     },
     title: {
         type: String,
         minlength: 0,
-        required: true
+        // required: true
     },
     labels: [
         {
