@@ -25,9 +25,7 @@ notesRouter.post('/', (request, response) => {
         .save()
         .then(result => {
             console.log('note saved')
-            response.json({
-                'response': 'success'
-            })
+            response.json(result)
         })
         .catch(error => next(error))
 
