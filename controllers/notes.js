@@ -4,6 +4,7 @@ const Note = require('../models/note')
 
 notesRouter.get('/', (request, response) => {
     Note.find({})
+        .populate('labels')
         .then(notes => {
             response.json(notes)
         })
@@ -23,6 +24,7 @@ notesRouter.post('/', (request, response, next) => {
 
     newNote
         .save()
+        .populate('labels')
         .then(result => {
             console.log('note saved')
             response.json(result)
@@ -53,11 +55,12 @@ notesRouter.put('/:id', (request, response, next) => {
         title: body.title,
         content: body.content,
         pinned: body.pinned,
-        color: body.color
+        color: body.color,
+        labels: body.labels,
     }
 
     Note
-        .findByIdAndUpdate(request.params.id, note, {new: true})
+        .findByIdAndUpdate(request.params.id, note, {new: true, populate: { path: 'labels' }})
         .then(updatedNote => {
             response.json(updatedNote)
         })
