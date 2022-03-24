@@ -2,7 +2,7 @@ const logger = require('../utils/logger')
 const labelsRouter = require('express').Router()
 const Label = require('../models/label')
 
-labelsRouter.get('/', (request, response) => {
+labelsRouter.get('/', (request, response, next) => {
     Label
         .find({})
         .then(labels => {
@@ -11,7 +11,7 @@ labelsRouter.get('/', (request, response) => {
         .catch(error => next(error))
 })
 
-labelsRouter.post('/', (request, response) => {
+labelsRouter.post('/', (request, response, next) => {
     const body = request.body
 
     const newLabel = new Label({
@@ -26,7 +26,7 @@ labelsRouter.post('/', (request, response) => {
         .catch(error => next(error))
 })
 
-labelsRouter.get('/:id', (request, response) => {
+labelsRouter.get('/:id', (request, response, next) => {
     Label
         .findById(request.params.id)
         .then(label => {
@@ -35,7 +35,7 @@ labelsRouter.get('/:id', (request, response) => {
         .catch(error => next(error))
 })
 
-labelsRouter.delete('/:id', (request, response) => {
+labelsRouter.delete('/:id', (request, response, next) => {
     Label
         .findByIdAndRemove(request.params.id)
         .then(result => {
@@ -44,7 +44,7 @@ labelsRouter.delete('/:id', (request, response) => {
         .catch(error => next(error))
 })
 
-labelsRouter.put('/:id', (request, response) => {
+labelsRouter.put('/:id', (request, response, next) => {
     const body = request.body
 
     const newLabel = {

@@ -9,7 +9,7 @@ notesRouter.get('/', (request, response) => {
         })
 })
 
-notesRouter.post('/', (request, response) => {
+notesRouter.post('/', (request, response, next) => {
     const body = request.body
 
     logger.info('The body from POST request: ', body)
@@ -17,8 +17,8 @@ notesRouter.post('/', (request, response) => {
     const newNote = new Note({
         title: body.title,
         content: body.content,
-        pinned: false,
-        color: 'blue'
+        pinned: body.pinned,
+        color: body.color
     })
 
     newNote
@@ -37,7 +37,7 @@ notesRouter.get('/:id', (request, response) => {
     })
 })
 
-notesRouter.delete('/:id', (request, response) => {
+notesRouter.delete('/:id', (request, response, next) => {
     Note
         .findByIdAndRemove(request.params.id)
         .then(result => {
@@ -46,7 +46,7 @@ notesRouter.delete('/:id', (request, response) => {
         .catch(error => next(error))
 })
 
-notesRouter.put('/:id', (request, response) => {
+notesRouter.put('/:id', (request, response, next) => {
     const body = request.body
 
     const note = {
