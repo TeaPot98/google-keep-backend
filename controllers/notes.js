@@ -62,6 +62,7 @@ notesRouter.put('/:id', (request, response, next) => {
     Note
         .findByIdAndUpdate(request.params.id, note, {new: true, populate: { path: 'labels' }})
         .then(updatedNote => {
+            console.log('The note sent after updating >>> ', updatedNote)
             response.json(updatedNote)
         })
         .catch(error => next(error))
