@@ -19,15 +19,18 @@ notesRouter.post('/', (request, response, next) => {
         title: body.title,
         content: body.content,
         pinned: body.pinned,
-        color: body.color
+        color: body.color,
+        labels: body.labels.map(l => l.id)
     })
 
     newNote
         .save()
-        .populate('labels')
+        // .populate('labels')
         .then(result => {
-            console.log('note saved')
-            response.json(result)
+            Note.populate(result, {path: 'labels'}, (err, result) => {
+                console.log('note saved')
+                response.json(result)
+            })
         })
         .catch(error => next(error))
 
@@ -56,7 +59,7 @@ notesRouter.put('/:id', (request, response, next) => {
         content: body.content,
         pinned: body.pinned,
         color: body.color,
-        labels: body.labels,
+        labels: body.labels.map(l => l.id),
     }
 
     Note
