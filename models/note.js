@@ -18,6 +18,8 @@ const noteSchema = new mongoose.Schema({
         }
     ],
     pinned: Boolean,
+    archived: Boolean,
+    deleted: Boolean,
     color: String
 })
 

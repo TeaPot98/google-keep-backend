@@ -20,7 +20,9 @@ notesRouter.post('/', (request, response, next) => {
         content: body.content,
         pinned: body.pinned,
         color: body.color,
-        labels: body.labels.map(l => l.id)
+        labels: body.labels.map(l => l.id),
+        deleted: body.deleted,
+        acrhived: body.archived
     })
 
     newNote
@@ -60,6 +62,8 @@ notesRouter.put('/:id', (request, response, next) => {
         pinned: body.pinned,
         color: body.color,
         labels: body.labels.map(l => l.id),
+        deleted: body.deleted,
+        archived: body.archived
     }
 
     Note
