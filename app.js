@@ -22,7 +22,7 @@ mongoose.connect(config.MONGODB_URI)
 // Prevent CORS Policy error
 app.use(cors())
 
-// app.use(express.static('build'))
+app.use(express.static('build'))
 
 // Use built-in body-parser to parse correctly the JSON from the requests
 app.use(express.json())
